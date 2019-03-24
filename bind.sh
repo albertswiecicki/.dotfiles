@@ -1,4 +1,4 @@
-files_to_bind=".bash_aliases .bash_custom .bashrc .vimrc"
+files_to_bind=".bash_aliases .bash_custom .bashrc .vimrc .git-prompt.sh"
 echo "You are going to overide following files"
 for f in ${files_to_bind}; do echo ${f}; done;
 read -p "Are you sure? [Y|y]: " -n 1 -r
