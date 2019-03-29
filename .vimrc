@@ -163,9 +163,13 @@ else
     colorscheme delek
 endif
 
-" mapping
+" custom mapping
 vmap <C-C> "+y
 map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+noremap <c-s-up> ddkP
+noremap <c-s-down> ddp
+inoremap <c-s-up> <Esc>ddkPi
+inoremap <c-s-down> <Esc>ddpi
 
 " switch between tabls
 map <M-Right> <c-w>l

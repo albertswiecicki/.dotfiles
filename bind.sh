@@ -1,11 +1,11 @@
 #!/bin/bash
 #bind dotfiles from ~/dotfiles/.* with ~/.*
-files_to_bind=".bash_aliases .bash_custom .bashrc .vimrc .git-prompt.sh"
+files_to_bind=".bash_aliases .bash_custom .bashrc .vimrc .git-prompt.sh .gitconfig"
 
 echo "You are going to overide following files"
 for f in ${files_to_bind}; do echo ${f}; done;
 
-read -p "Are you sure? [Y|y]: " -n 1 -r
+read -p "Are you sure? [Yy|Nn]: " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
