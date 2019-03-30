@@ -6,14 +6,15 @@ ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	wget \
-	git \
-	vim \
+    wget \
+    git \
+    tmux \
+    vim \
     vim-gtk \
     python3 \
     python3-pip \
     python3.6 \
-	python3.6-dev \
+    python3.6-dev \
     exuberant-ctags \
     && rm -rf /var/lib/apt/lists/* \
     && pip3 install pip pep8 flake8 pyflakes isort
