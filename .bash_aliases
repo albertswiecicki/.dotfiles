@@ -5,9 +5,10 @@ alias __restart_net_menager='sudo service network-manager restart'
 
 # dotfiles
 alias dot='cd ~/.dotfiles/'
-alias __alias='(vim ~/.bash_aliases) && . ~/.bashrc'
-alias __calias='(vim ~/.bash_custom) && . ~/.bashrc'
+alias __alias='(vim ~/.dotfiles/.bash_aliases) && . ~/.bashrc'
+alias __calias='(vim ~/.dotfiles/.bash_custom) && . ~/.bashrc'
 alias __scrpits='cd ~/.dotfiles/scripts/'
+alias __tmux='(vim ~/.dotfiles/.tmux.conf && tmux source-file ~/.tmux.conf)'
 
 #directories
 alias ..='cd ..'
