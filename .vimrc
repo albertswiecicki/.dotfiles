@@ -216,7 +216,7 @@ let g:syntastic_check_on_open = 1
 " If you don't need write JSX, you can use jshint.
 " And eslint is slow, but not a hindrance
 " let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
 " custom icons (enable them if you use a patched font, and enable the previous
@@ -257,7 +257,8 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_ignore_case = 1
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
+" Auto select
+let g:neocomplcache_enable_auto_select = 0
 
 let g:neocomplcache_enable_fuzzy_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1

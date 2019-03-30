@@ -4,6 +4,7 @@ alias _clear='clear && clear && clear'
 alias __restart_net_menager='sudo service network-manager restart'
 
 # dotfiles
+alias dot='cd ~/.dotfiles/'
 alias __alias='(vim ~/.bash_aliases) && . ~/.bashrc'
 alias __calias='(vim ~/.bash_custom) && . ~/.bashrc'
 alias __scrpits='cd ~/.dotfiles/scripts/'

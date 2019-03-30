@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3.6 \
 	python3.6-dev \
+    exuberant-ctags \
     && rm -rf /var/lib/apt/lists/* \
     && pip3 install pip pep8 flake8 pyflakes isort
 
