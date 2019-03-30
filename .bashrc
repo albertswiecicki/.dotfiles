@@ -36,7 +36,8 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # Add 256 color support required by tmux and vim
-export TERM=screen-256color
+# trouble with vim -> export TERM=screen-256color
+export TERM=xterm-256color
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -56,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=yes
     else
 	color_prompt=
-    fi
+fi
 fi
 
 if [ "$color_prompt" = yes ]; then
@@ -127,6 +128,8 @@ fi
 green="\[\033[1;32m\]"
 blue="\[\033[1;34m\]"
 purple="\[\033[1;35m\]"
+red="\[\033[1;31m\]"
+turq="\[\033[1;36m\]"
 reset="\[\033[0m\]"
 
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -148,4 +151,4 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\u' adds the name of the current user to the prompt
 # '\$(__git_ps1)' adds git-stuff related
 # '\W' adds the name of the current directory
-export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
+export PS1="$purple${USER:0:3}$blue@$red${HOSTNAME:0:5}$green\$(__git_ps1)$blue \W $ $reset"
