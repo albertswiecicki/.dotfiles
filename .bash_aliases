@@ -1,8 +1,10 @@
 #general
 alias caja='caja . &'
+alias htop='htop -d 3'
+alias gpustat='gpustat -i 0.2'
 alias _clear='clear && clear && clear'
-alias _gpustat='gpustat -i 0.2'
 alias __restart_net_menager='sudo service network-manager restart'
+
 # dotfiles
 alias dot='cd ~/.dotfiles/'
 alias __bashrc='(vim ~/.dotfiles/.bashrc) && . ~/.bashrc'

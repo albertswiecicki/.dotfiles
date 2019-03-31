@@ -66,11 +66,10 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'myusuf3/numbers.vim'
 " Dockerfile support
 Plugin 'ekalinin/Dockerfile.vim'
-
+" Code commenter
+Plugin 'scrooloose/nerdcommenter'
 
 " ToConsider 
-" Code commenter
-" Plugin 'scrooloose/nerdcommenter'
 " Code and files fuzzy finder
 " Plugin 'ctrlpvim/ctrlp.vim'
 " Extension to ctrlp, for fuzzy command finder
@@ -107,7 +106,6 @@ endif
 " allow plugins by file type (required for plugins!)
 filetype plugin on
 filetype indent on
-
 " tabs and spaces handling
 set expandtab " replace tab with spaces
 set tabstop=4
@@ -263,12 +261,12 @@ let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_enable_fuzzy_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
+let g:neocomplcache_fuzzy_completion_start_length = 3
+let g:neocomplcache_auto_completion_start_length = 3
+let g:neocomplcache_manual_completion_start_length = 3
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
+let g:neocomplcache_min_keyword_length = 3
+let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " complete with workds from any opened file
 let g:neocomplcache_same_filetype_lists = {}
@@ -280,3 +278,21 @@ if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
