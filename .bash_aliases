@@ -24,6 +24,13 @@ alias _mkdir='source ~/.dotfiles/scripts/_mkdir.sh'
 alias __virtualenv_py3='cd ~/virtualenvs && python3 -m venv '
 alias __virtualenv_py2='cd ~/virtualenvs && virtualenv --python=python2.7 '
 
+#Docker
+alias __check_docker='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-runtime nvidia-smi'
+
+#Jupyter
+alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8110 --no-browser --allow-root &'
+alias __jupyter_list='jupyter notebook list'
+
 #clipboard
 alias ctrlc='xclip -selection c'
 alias ctrlv='xclip -selection c -o'
