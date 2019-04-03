@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     git \
     tmux \
+    less \
     zip \
     vim \
     vim-gtk \
