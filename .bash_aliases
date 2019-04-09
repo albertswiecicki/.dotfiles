@@ -42,7 +42,7 @@ alias __docker_run='nvidia-docker run -d -it \
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/bash'
 alias __docker_kill='docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME'
 alias __docker_build='docker build -t $DOCKER_IMG -f Dockerfile .'
-alias __docker_rebuild=' __docker_kill && __docker_build && __docker_run && __exec '
+alias __docker_rebuild='docker image rm $DOCKER_IMG && __docker_build && __docker_run && __docker_exec'
 
 #Jupyter
 alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8110 --no-browser --allow-root &'
@@ -51,6 +51,9 @@ alias __jupyter_list='jupyter notebook list'
 #Mlflow
 alias __mlflow='nohup mlflow server --host 0.0.0.0 --port 8101 &'
 alias __mlflow_kill='kill -9 `pgrep -f mlflow`'
+
+#Tensorboard
+alias tensoboard_daemon='~/.dotfiles/scripts/tensorboard_daemon.sh'
 
 #clipboard
 alias ctrlc='xclip -selection c'
