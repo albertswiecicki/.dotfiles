@@ -13,6 +13,7 @@ alias __alias='(vim ~/.dotfiles/.bash_aliases) && . ~/.bashrc'
 alias __calias='(vim ~/.dotfiles/.bash_custom) && . ~/.bashrc'
 alias __scrpits='cd ~/.dotfiles/scripts/'
 alias __tmux='(vim ~/.dotfiles/.tmux.conf && tmux source-file ~/.tmux.conf)'
+alias __bind_ports='~/.dotfiles/scripts/bind_ports.sh '
 
 #directories
 alias ..='cd ..'
@@ -34,9 +35,9 @@ alias __docker_run='nvidia-docker run -d -it \
                     -p 8100-8110:8100-8110 \
                     --shm-size 8G \
                     -v /mnt:/mnt \
-                    -v ~/projects/data:/data \
-                    -v ~/projects/imcom:/imcom \
-                    -v ~/projects/results:/results \
+                    -v $PROJECTS/data:/data \
+                    -v $PROJECTS/imcom:/imcom \
+                    -v $PROJECTS/results:/results \
                     -v ~/.bash_history:/root/.bash_history \
                     $DOCKER_IMG'
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/bash'
