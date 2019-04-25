@@ -2,7 +2,7 @@
 alias caja='caja . &'
 alias htop='htop -d 3'
 alias code='code . -n'
-alias gpustat='gpustat -i 0.2'
+alias gpustat='gpustat -i 0.5'
 alias _clear='clear && clear && clear'
 alias __restart_net_menager='sudo service network-manager restart'
 
@@ -50,11 +50,12 @@ alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8110 --no-browser 
 alias __jupyter_list='jupyter notebook list'
 
 #Mlflow
-alias __mlflow='nohup mlflow server --host 0.0.0.0 --port 8101 &'
+alias __mlflow='nohup mlflow server --host 0.0.0.0 --port 8101 --gunicorn-opts "--timeout=120" &'
 alias __mlflow_kill='kill -9 `pgrep -f mlflow`'
 
 #Tensorboard
-alias tensoboard_daemon='~/.dotfiles/scripts/tensorboard_daemon.sh'
+alias tensorboard_daemon='~/.dotfiles/scripts/tensorboard_daemon.sh'
+alias tensorboard_port='tensoboard_daemon --logdir=. --samples_per_plugin images=100 --port='
 
 #clipboard
 alias ctrlc='xclip -selection c'

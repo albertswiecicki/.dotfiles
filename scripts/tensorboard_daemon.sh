@@ -13,6 +13,6 @@ do
 	eval "tensorboard $args > /dev/null 2>&1 &"
 	pid=$!
 	echo "tensorboard running on $pid"
-	sleep 20
+	sleep 60
 	kill -9 $pid
 done
