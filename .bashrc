@@ -153,4 +153,19 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\W' adds the name of the current directory
 export PS1="$purple\u$blue@$red${HOSTNAME:0:5}$green\$(__git_ps1)$blue \W $ $reset"
 
+if test !"`find ~/.dotfiles/.git/FETCH_HEAD -mtime +14`"
+then
+    echo setup newer than 2 weeks
+else
+    echo setup out of date!
+    read -p "Do you want to update dot repo? [Yy|Nn]: " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        (builtin cd ~/.dotfiles && git pull)
+    else
+        echo Obmitting update
+    fi
+fi
+
 echo "DFTBA, el Alberto!"
