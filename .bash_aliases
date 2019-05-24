@@ -5,6 +5,7 @@ alias code='code . -n'
 alias gpustat='gpustat -i 0.5'
 alias _clear='clear && clear && clear'
 alias __restart_net_menager='sudo service network-manager restart'
+alias __remove_white_space_from_images='find ./ -name "*.png" -exec convert {} -trim ./{} \;'
 
 # dotfiles
 alias dot='cd ~/.dotfiles/'
@@ -27,7 +28,7 @@ alias __virtualenv_py3='cd ~/virtualenvs && python3 -m venv '
 alias __virtualenv_py2='cd ~/virtualenvs && virtualenv --python=python2.7 '
 
 #Docker
-alias __change_file_permissions='find . -type f -print0 | xargs -0 sudo chmod +666 && find . -type d -print0 | xargs -0 sudo chmod +775'
+alias __change_file_permissions='find . -type f -print0 | xargs -0 sudo chmod +666 && find . -type d -print0 | xargs -0 sudo chmod +775 && sudo chown -R $USER:$USER .'
 alias __docker_var='echo CONTAINER_NAME: $CONTAINER_NAME; echo DOCKER_IMG: $DOCKER_IMG'
 alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-runtime nvidia-smi'
 alias __docker_run='nvidia-docker run -d -it \
