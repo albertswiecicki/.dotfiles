@@ -1,8 +1,8 @@
 #!/bin/sh
 if ! [ $(id -u) = 0 ]; then
- echo "y\n" | sudo apt install autotools-dev automake pkg-config libevent-dev libncurses5-dev
+  sudo apt install autotools-dev automake pkg-config libevent-dev libncurses5-dev bison -y
 else
-  echo "y\n" | apt install autotools-dev automake pkg-config libevent-dev libncurses5-dev
+  apt install autotools-dev automake pkg-config libevent-dev libncurses5-dev bison -y
 fi
 
 cd /tmp/
