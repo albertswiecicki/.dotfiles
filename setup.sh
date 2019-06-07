@@ -1,5 +1,9 @@
 #!/bin/sh
 
+sudo apt install vim git htop python3-pip
+pip3 install gpustat
+
+
 # script responsible for seting up basic configuration
 
 # set swappiness level
