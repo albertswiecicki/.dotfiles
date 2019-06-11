@@ -56,7 +56,7 @@ alias __mlflow_kill='kill -9 `pgrep -f mlflow`'
 
 #Tensorboard
 alias tensorboard_daemon='~/.dotfiles/scripts/tensorboard_daemon.sh'
-alias tensorboard_port='~/.dotfiles/scripts/tensorboard_daemon.sh --logdir=. --samples_per_plugin images=100 --port='
+alias tensorboard_port='~/.dotfiles/scripts/tensorboard_daemon.sh --logdir=. --samples_per_plugin images=100 --port '
 
 #clipboard
 alias ctrlc='xclip -selection c'
