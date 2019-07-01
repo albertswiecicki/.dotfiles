@@ -165,7 +165,7 @@ if [ ! -f ~/.dotfiles/.git/FETCH_HEAD ]; then
     fi
 fi
 
-if test !"`find ~/.dotfiles/.git/FETCH_HEAD -mtime +14`"
+if test ! `find ~/.dotfiles/.git/FETCH_HEAD -mtime +14`
 then
     echo setup newer than 2 weeks
 else

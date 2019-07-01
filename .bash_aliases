@@ -4,6 +4,7 @@ alias htop='htop -d 3'
 alias code='code . -n'
 alias gpustat='gpustat -i 0.5'
 alias _clear='clear && clear && clear'
+alias __starce='strace -e trace=open,stat,read,write '
 alias __restart_net_menager='sudo service network-manager restart'
 alias __remove_white_space_from_images='find ./ -name "*.png" -exec convert {} -trim ./{} \;'
 
@@ -38,6 +39,7 @@ alias __docker_run='nvidia-docker run -d -it \
                     -v /mnt:/mnt \
                     -v $PROJECTS/data:/data \
                     -v $PROJECTS/imcom:/imcom \
+                    -v $PROJECTS/models:/models \
                     -v $PROJECTS/results:/results \
                     -v ~/.bash_history:/root/.bash_history \
                     $DOCKER_IMG'
