@@ -165,11 +165,14 @@ if [ ! -f ~/.dotfiles/.git/FETCH_HEAD ]; then
     fi
 fi
 
-if test ! `find ~/.dotfiles/.git/FETCH_HEAD -mtime +14`
+
+ftime=`stat -c %Y ~/.dotfiles/.git/FETCH_HEAD`
+ctime=`date +%s`
+days_since_last_update=$(( (ctime - ftime) / 86400 ))
+echo last update $days_since_last_update days ago
+
+if [ $days_since_last_update -ge 14 ] 
 then
-    echo setup newer than 2 weeks
-else
-    echo setup out of date!
     read -p "Do you want to update dot repo? [Yy|Nn]: " -n 1 -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
@@ -179,5 +182,4 @@ else
         echo Obmitting update
     fi
 fi
-
 echo "DFTBA, el Alberto!"
