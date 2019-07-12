@@ -1,4 +1,6 @@
 #general
+alias l='ls -A'
+alias c='caja . &'
 alias caja='caja . &'
 alias htop='htop -d 3'
 alias code='code . -n'
@@ -6,7 +8,7 @@ alias gpustat='gpustat -i 0.5'
 alias _clear='clear && clear && clear'
 alias __starce='strace -e trace=open,stat,read,write '
 alias __restart_net_menager='sudo service network-manager restart'
-alias __remove_white_space_from_images='find ./ -name "*.png" -exec convert {} -trim ./{} \;'
+alias __remove_white_space_from_images='find ./ -name "*.png" -o -iname "*.jpg" -exec convert {} -trim ./{} \;'
 
 # dotfiles
 alias dot='cd ~/.dotfiles/'
@@ -19,9 +21,9 @@ alias __bind_ports='~/.dotfiles/scripts/bind_ports.sh '
 
 #directories
 alias ..='cd ..'
-alias l='ls -A'
 alias h='cd ~/'
 alias t='cd /tmp/'
+alias p='cd ~/projects/'
 alias v='cd ~/Videos/'
 alias d='cd ~/Downloads'
 alias cd='source ~/.dotfiles/scripts/cd.sh'
@@ -37,13 +39,13 @@ alias __docker_var='echo CONTAINER_NAME: $CONTAINER_NAME; echo DOCKER_IMG: $DOCK
 alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-runtime nvidia-smi'
 alias __docker_run='nvidia-docker run -d -it \
                     --name $CONTAINER_NAME \
-                    -p 8100-8110:8100-8110 \
+                    -p $DOCKER_PORTS:$DOCKER_PORTS \
                     --shm-size 8G \
                     -v /mnt:/mnt \
                     -v $PROJECTS/data:/data \
-                    -v $PROJECTS/imcom:/imcom \
                     -v $PROJECTS/models:/models \
                     -v $PROJECTS/results:/results \
+                    -v $PROJECTS/$PROJECT:/$PROJECT \
                     -v ~/.bash_history:/root/.bash_history \
                     $DOCKER_IMG'
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/bash'
