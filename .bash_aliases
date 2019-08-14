@@ -1,3 +1,11 @@
+#Export env var
+if [ -z "$DOT" ]
+then
+    export DOT=~/.dotfiles
+else
+    echo "warn: dotfile dir is already set to $DOT"
+fi
+
 #general
 alias l='ls -A'
 alias c='caja . &'
@@ -11,13 +19,13 @@ alias __restart_net_menager='sudo service network-manager restart'
 alias __remove_white_space_from_images='find ./ -name "*.png" -o -iname "*.jpg" -exec convert {} -trim ./{} \;'
 
 # dotfiles
-alias dot='cd ~/.dotfiles/'
-alias __bashrc='(vim ~/.dotfiles/.bashrc) && . ~/.bashrc'
-alias __alias='(vim ~/.dotfiles/.bash_aliases) && . ~/.bashrc'
-alias __calias='(vim ~/.dotfiles/.bash_custom) && . ~/.bashrc'
-alias __scrpits='cd ~/.dotfiles/scripts/'
-alias __tmux='(vim ~/.dotfiles/.tmux.conf && tmux source-file ~/.tmux.conf)'
-alias __bind_ports='~/.dotfiles/scripts/bind_ports.sh '
+alias dot='cd $DOT'
+alias __bashrc='(vim $DOT/.bashrc) && . ~/.bashrc'
+alias __alias='(vim $DOT/.bash_aliases) && . ~/.bashrc'
+alias __calias='(vim $DOT/.bash_custom) && . ~/.bashrc'
+alias __scrpits='cd $DOT/scripts/'
+alias __tmux='(vim $DOT/.tmux.conf && tmux source-file ~/.tmux.conf)'
+alias __bind_ports='$DOT/scripts/bind_ports.sh '
 
 #directories
 alias ..='cd ..'
@@ -26,8 +34,8 @@ alias t='cd /tmp/'
 alias p='cd ~/projects/'
 alias v='cd ~/Videos/'
 alias d='cd ~/Downloads'
-alias cd='source ~/.dotfiles/scripts/cd.sh'
-alias _mkdir='source ~/.dotfiles/scripts/_mkdir.sh'
+alias cd='source $DOT/scripts/cd.sh'
+alias _mkdir='source $DOT/scripts/_mkdir.sh'
 
 #Python
 alias __virtualenv_py3='cd ~/virtualenvs && python3 -m venv '
@@ -40,7 +48,7 @@ alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-
 alias __docker_run='nvidia-docker run -d -it \
                     --name $CONTAINER_NAME \
                     -p $DOCKER_PORTS:$DOCKER_PORTS \
-                    --shm-size 8G \
+                    --shm-size 16G \
                     -v /mnt:/mnt \
                     -v $PROJECTS/data:/data \
                     -v $PROJECTS/models:/models \
@@ -58,12 +66,12 @@ alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8110 --no-browser 
 alias __jupyter_list='jupyter notebook list'
 
 #Mlflow
-alias __mlflow='nohup mlflow server --host 0.0.0.0 --port 8101 --gunicorn-opts "--timeout=120" &'
+alias __mlflow='$DOT/scripts/mlflow.sh'
 alias __mlflow_kill='kill -9 `pgrep -f mlflow`'
 
 #Tensorboard
-alias tensorboard_daemon='~/.dotfiles/scripts/tensorboard_daemon.sh'
-alias tensorboard_port='~/.dotfiles/scripts/tensorboard_daemon.sh --logdir=. --samples_per_plugin images=100 --port '
+alias __tensorboard_daemon='$DOT/scripts/tensorboard_daemon.sh'
+alias __tensorboard_port='$DOT/scripts/tensorboard_daemon.sh --logdir=. --samples_per_plugin images=100 --port '
 
 #clipboard
 alias ctrlc='xclip -selection c'
