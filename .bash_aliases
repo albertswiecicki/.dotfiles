@@ -16,7 +16,8 @@ alias gpustat='gpustat -i 0.5'
 alias _clear='clear && clear && clear'
 alias __starce='strace -e trace=open,stat,read,write '
 alias __restart_net_menager='sudo service network-manager restart'
-alias __remove_white_space_from_images='find ./ -name "*.png" -o -iname "*.jpg" -exec convert {} -trim ./{} \;'
+alias __remove_white_space_from_images='find ./ \( -iname "*.png" -o -iname "*.jpg" \) -exec convert {} -trim ./{} \;'
+alias diki='$DOT/scripts/diki.sh'
 
 # dotfiles
 alias dot='cd $DOT'
@@ -48,21 +49,28 @@ alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-
 alias __docker_run='nvidia-docker run -d -it \
                     --name $CONTAINER_NAME \
                     -p $DOCKER_PORTS:$DOCKER_PORTS \
-                    --shm-size 16G \
+                    --shm-size 24G \
                     -v /mnt:/mnt \
+                    -v /tmp/.X11-unix:/tmp/.X11-unix \
                     -v $PROJECTS/data:/data \
                     -v $PROJECTS/models:/models \
                     -v $PROJECTS/results:/results \
                     -v $PROJECTS/$PROJECT:/$PROJECT \
                     -v ~/.bash_history:/root/.bash_history \
+                    -v /media/albert/MOST:/MOST \
+                    -e DISPLAY=unix$DISPLAY \
                     $DOCKER_IMG'
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/bash'
 alias __docker_kill='docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME'
 alias __docker_build='docker build -t $DOCKER_IMG -f Dockerfile .'
 alias __docker_rebuild='docker image rm $DOCKER_IMG && __docker_build && __docker_run && __docker_exec'
+alias __docker_reload_daemon='sudo systemctl daemon-reload & sudo systemctl restart docker'
+
+#docker compose
+alias __docker_compose_rm='docker-compose down --rmi all'
 
 #Jupyter
-alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8110 --no-browser --allow-root &'
+alias __jupyter_start='nohup jupyter lab --ip=0.0.0.0  --port=8200 --no-browser --allow-root &'
 alias __jupyter_list='jupyter notebook list'
 
 #Mlflow

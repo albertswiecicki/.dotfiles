@@ -3,6 +3,8 @@
 sudo apt install vim git htop python3-pip
 pip3 install gpustat
 
+#allow docker containers use x11
+xhost +"local:docker@"
 
 # script responsible for seting up basic configuration
 
