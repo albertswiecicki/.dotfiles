@@ -182,4 +182,6 @@ then
         echo Obmitting update
     fi
 fi
-echo "DFTBA, el Alberto!"
+echo -e "Self respect is a power #DFTBA, el Alberto!" | lolcat
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
