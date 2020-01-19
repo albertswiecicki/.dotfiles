@@ -1,8 +1,11 @@
 #!/bin/sh
 
-sudo apt install vim git htop python3-pip less tmux zsh
+sudo apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager
+
 pip3 install gpustat
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
 cd ~/.dotfiles/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
@@ -20,4 +23,15 @@ else
     echo "vm.swappiness = 10" | sudo tee -a /etc/sysctl.conf
     echo swappiness has been set to 10
 fi
-chsh -s /usr/bin/zsh root
+
+~/.dotfiles/bind.sh
+~/.dotfiles/scripts/update_tmux.sh
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hermit.zip
+unzip Hermit.zip -d Hermit
+cp -r Hermit/ /usr/share/fonts/truetype/
+rm -rf Hermit*
+echo "Please set font in console profile settings <Hurmit medium>"
+
+echo "Please re-login after changing the shell"
+chsh -s /bin/zsh
