@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager
+sudo apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager timeshift
 
 pip3 install gpustat
 
@@ -32,6 +32,11 @@ unzip Hermit.zip -d Hermit
 cp -r Hermit/ /usr/share/fonts/truetype/
 rm -rf Hermit*
 echo "Please set font in console profile settings <Hurmit medium>"
+read -p "Press enter to continue"
+
+echo "Please remember to setup timeshift"
+read -p "Press enter to continue"
 
 echo "Please re-login after changing the shell"
+read -p "Press enter to continue"
 chsh -s /bin/zsh

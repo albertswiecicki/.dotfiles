@@ -19,11 +19,13 @@ alias __starce='strace -e trace=open,stat,read,write '
 alias __restart_net_menager='sudo service network-manager restart'
 alias __remove_white_space_from_images='find ./ \( -iname "*.png" -o -iname "*.jpg" \) -exec convert {} -trim ./{} \;'
 alias diki='$DOT/scripts/diki.sh'
+alias __map_ralt2bspace='xmodmap -e "keycode 108 = BackSpace"'
+
 
 # dotfiles
 alias dot='cd $DOT'
 alias __bashrc='(vim $DOT/.bashrc) && . ~/.bashrc'
-alias __alias='(vim $DOT/.bash_aliases) && . ~/.bashrc'
+alias __alias='(vim $DOT/.bash_aliases) && if [ $SHELL = "/bin/zsh" ]; then . ~/.zshrc ; else  . ~/.bashrc ; fi'
 alias __calias='(vim $DOT/.bash_custom) && . ~/.bashrc'
 alias __scrpits='cd $DOT/scripts/'
 alias __tmux='(vim $DOT/.tmux.conf && tmux source-file ~/.tmux.conf)'
