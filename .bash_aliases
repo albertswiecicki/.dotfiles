@@ -23,10 +23,11 @@ alias __map_ralt2bspace='xmodmap -e "keycode 108 = BackSpace"'
 
 
 # dotfiles
+alias __source_dot='if [ $SHELL = "/bin/zsh" ]; then . ~/.zshrc ; else  . ~/.bashrc ; fi'
 alias dot='cd $DOT'
 alias __bashrc='(vim $DOT/.bashrc) && . ~/.bashrc'
-alias __alias='(vim $DOT/.bash_aliases) && if [ $SHELL = "/bin/zsh" ]; then . ~/.zshrc ; else  . ~/.bashrc ; fi'
-alias __calias='(vim $DOT/.bash_custom) && . ~/.bashrc'
+alias __alias='(vim $DOT/.bash_aliases) && __source_dot'
+alias __calias='(vim $DOT/.bash_custom) && __source_dot'
 alias __scrpits='cd $DOT/scripts/'
 alias __tmux='(vim $DOT/.tmux.conf && tmux source-file ~/.tmux.conf)'
 alias __bind_ports='$DOT/scripts/bind_ports.sh '
