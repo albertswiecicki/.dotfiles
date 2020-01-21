@@ -20,6 +20,11 @@ alias __restart_net_menager='sudo service network-manager restart'
 alias __remove_white_space_from_images='find ./ \( -iname "*.png" -o -iname "*.jpg" \) -exec convert {} -trim ./{} \;'
 alias diki='$DOT/scripts/diki.sh'
 alias __map_ralt2bspace='xmodmap -e "keycode 108 = BackSpace"'
+alias __vpn='expressvpn connect'
+alias __vpn_disconnect='expressvpn disconnect'
+alias __install='sudo apt install -y '
+alias __snap_install='snap install --classic '
+alias __remove='sudo apt remove '
 
 
 # dotfiles
