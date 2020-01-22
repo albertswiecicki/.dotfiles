@@ -28,7 +28,7 @@ alias __remove='sudo apt remove '
 
 
 # dotfiles
-alias __source_dot='if [ $SHELL = "/bin/zsh" ]; then . ~/.zshrc ; else  . ~/.bashrc ; fi'
+alias __source_dot='if [ $SHELL = "/bin/zsh" ] || [ $SHELL = "/usr/bin/zsh" ]; then . ~/.zshrc ; else  . ~/.bashrc ; fi'
 alias dot='cd $DOT'
 alias __bashrc='(vim $DOT/.bashrc) && . ~/.bashrc'
 alias __alias='(vim $DOT/.bash_aliases) && __source_dot'
@@ -69,7 +69,7 @@ alias __docker_run='nvidia-docker run -d -it \
                     -v /media/albert/MOST:/MOST \
                     -e DISPLAY=unix$DISPLAY \
                     $DOCKER_IMG'
-alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/bash'
+alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/zsh'
 alias __docker_kill='docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME'
 alias __docker_build='docker build -t $DOCKER_IMG -f Dockerfile .'
 alias __docker_rebuild='docker image rm $DOCKER_IMG && __docker_build && __docker_run && __docker_exec'

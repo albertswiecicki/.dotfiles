@@ -466,3 +466,7 @@ set ttimeoutlen=50
 map <Leader>e :lw<CR>
 set cc=80
 vmap <C-C> "+y
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
