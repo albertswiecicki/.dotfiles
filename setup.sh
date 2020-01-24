@@ -1,10 +1,15 @@
 #!/bin/bash
+#vim-gtk3 is required to use "ctrl-c to copy from vim"
+#you can check if it is avaliable by typing 'vim --version | grep clip'
+
 if ! [ $(id -u) = 0 ]; then
-    sudo apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager timeshift
+    sudo apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager timeshift vim-gtk3
 else
-    apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager timeshift
+    apt install vim neovim git htop python3-pip less tmux zsh wget curl lolcat font-manager timeshift vim-gtk3
 fi
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+
 
 cd ~/.dotfiles/
 pip3 install gpustat
