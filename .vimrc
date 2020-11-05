@@ -471,3 +471,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set clipboard=unnamedplus
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
