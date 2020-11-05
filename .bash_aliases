@@ -7,7 +7,7 @@ else
 fi
 
 #general
-alias l='ls -A'
+alias l='ls -Atr'
 alias c='caja . &'
 alias caja='caja . &'
 alias htop='htop -d 3'
@@ -18,6 +18,7 @@ alias _clear='clear && clear && clear'
 alias __starce='strace -e trace=open,stat,read,write '
 alias __restart_net_menager='sudo service network-manager restart'
 alias __remove_white_space_from_images='find ./ \( -iname "*.png" -o -iname "*.jpg" \) -exec convert {} -trim ./{} \;'
+alias __convert_webp_to_png='find ./ -name "*.webp" -exec dwebp {} -o {}.png \;'
 alias diki='$DOT/scripts/diki.sh'
 alias __map_ralt2bspace='xmodmap -e "keycode 108 = BackSpace"'
 alias __vpn='expressvpn connect'
@@ -44,15 +45,16 @@ alias t='cd /tmp/'
 alias p='cd ~/projects/'
 alias v='cd ~/Videos/'
 alias d='cd ~/Downloads'
+alias leetcode='cd ~/projects/interviews/leetcode/general/'
 alias cd='source $DOT/scripts/cd.sh'
 alias _mkdir='source $DOT/scripts/_mkdir.sh'
+alias __change_file_permissions='find . -type f -print0 | xargs -0 sudo chmod +666 && find . -type d -print0 | xargs -0 sudo chmod +775 && sudo chown -R $USER:$USER .'
 
 #Python
 alias __virtualenv_py3='cd ~/virtualenvs && python3 -m venv '
 alias __virtualenv_py2='cd ~/virtualenvs && virtualenv --python=python2.7 '
 
 #Docker
-alias __change_file_permissions='find . -type f -print0 | xargs -0 sudo chmod +666 && find . -type d -print0 | xargs -0 sudo chmod +775 && sudo chown -R $USER:$USER .'
 alias __docker_var='echo CONTAINER_NAME: $CONTAINER_NAME; echo DOCKER_IMG: $DOCKER_IMG'
 alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-runtime nvidia-smi'
 alias __docker_run='nvidia-docker run -d -it \
@@ -60,13 +62,12 @@ alias __docker_run='nvidia-docker run -d -it \
                     -p $DOCKER_PORTS:$DOCKER_PORTS \
                     --shm-size 24G \
                     -v /mnt:/mnt \
-                    -v /tmp/.X11-unix:/tmp/.X11-unix \
                     -v $PROJECTS/data:/data \
                     -v $PROJECTS/models:/models \
                     -v $PROJECTS/results:/results \
                     -v $PROJECTS/$PROJECT:/$PROJECT \
                     -v ~/.bash_history:/root/.bash_history \
-                    -v /media/albert/MOST:/MOST \
+                    -v /tmp/.X11-unix:/tmp/.X11-unix \
                     -e DISPLAY=unix$DISPLAY \
                     $DOCKER_IMG'
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/zsh'
