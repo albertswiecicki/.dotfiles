@@ -1,4 +1,4 @@
-" Based on fosa-vim-config https://github.com/fisadev/fisa-vim-config 
+" Based on fosa-vim-config https://github.com/fisadev/fisa-vim-config
 
 let fancy_symbols_enabled = 1
 
@@ -34,9 +34,9 @@ if vim_plug_just_installed
     :execute 'source '.fnameescape(vim_plug_path)
 endif
 
-" Obscure hacks done, you can now modify the rest of the config down below 
+" Obscure hacks done, you can now modify the rest of the config down below
 " as you wish :)
-" IMPORTANT: some things in the config are vim or neovim specific. It's easy 
+" IMPORTANT: some things in the config are vim or neovim specific. It's easy
 " to spot, they are inside `if using_vim` or `if using_neovim` blocks.
 
 " ============================================================================
@@ -127,6 +127,9 @@ Plug 'neomake/neomake'
 Plug 'myusuf3/numbers.vim'
 " Nice icons in the file explorer and file type status line.
 Plug 'ryanoasis/vim-devicons'
+" Autoformater for cpp, python etc
+Plug 'chiel92/vim-autoformat'
+
 
 if using_vim
     " Consoles as buffers (neovim has its own consoles as buffers)
@@ -135,7 +138,7 @@ if using_vim
     Plug 'vim-scripts/matchit.zip'
 endif
 
-" Code searcher. If you enable it, you should also configure g:hound_base_url 
+" Code searcher. If you enable it, you should also configure g:hound_base_url
 " and g:hound_port, pointing to your hound instance
 " Plug 'mattn/webapi-vim'
 " Plug 'jfo/hound.vim'
@@ -154,7 +157,7 @@ endif
 " ============================================================================
 " Vim settings and mappings
 " You can edit them as you wish
- 
+
 if using_vim
     " A bunch of things that are set by default in neovim, but not in vim
 
@@ -206,7 +209,7 @@ set shiftwidth=4
 set nu
 
 " remove ugly vertical lines on window division
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 " use 256 colors when possible
 if has('gui_running') || using_neovim || (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256')
@@ -233,7 +236,7 @@ set wildmode=list:longest
 ca w!! w !sudo tee "%"
 
 " tab navigation mappings
-map tt :tabnew 
+map tt :tabnew
 map <M-Right> :tabn<CR>
 imap <M-Right> <ESC>:tabn<CR>
 map <M-Left> :tabp<CR>
@@ -250,7 +253,7 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
-set shell=/bin/bash 
+set shell=/bin/bash
 
 " Ability to add python breakpoints
 " (I use ipdb, but you can change it to whatever tool you use for debugging)
@@ -346,8 +349,10 @@ nmap ,c :Commands<CR>
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option({
+            \   'ignore_case': v:true,
+            \   'smart_case': v:true,
+            \})
 " complete with words from any opened file
 let g:context_filetype#same_filetypes = {}
 let g:context_filetype#same_filetypes._ = '_'
@@ -370,7 +375,7 @@ nmap ,D :tab split<CR>:call jedi#goto()<CR>
 " Ack.vim ------------------------------
 
 " mappings
-nmap ,r :Ack 
+nmap ,r :Ack
 nmap ,wr :execute ":Ack " . expand('<cword>')<CR>
 
 " Window Chooser ------------------------------
@@ -427,7 +432,7 @@ if fancy_symbols_enabled
 
     " custom airline symbols
     if !exists('g:airline_symbols')
-       let g:airline_symbols = {}
+        let g:airline_symbols = {}
     endif
     let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
@@ -449,13 +454,12 @@ else
     let custom_configs_path = "~/.vim/custom.vim"
 endif
 if filereadable(expand(custom_configs_path))
-  execute "source " . custom_configs_path
+    execute "source " . custom_configs_path
 endif
 
 set mouse=a
 set cursorline
 set cursorcolumn
-map <F5> <Esc>:w<CR>:!clear;python3 %; read -p "Press enter to continue"<CR> 
 
 noremap <c-s-up> ddkP
 noremap <c-s-down> ddp
@@ -475,3 +479,49 @@ noremap ; l
 noremap l k
 noremap k j
 noremap j h
+
+
+set splitright
+let g:split_term_style = 'vertical'
+
+"works for nvim
+" Based on github.com/mizlan/vim-and-cp
+function! TermWrapper(command) abort
+    if !exists('g:split_term_style') | let g:split_term_style = 'vertical' | endif
+    if g:split_term_style ==# 'vertical'
+        let buffercmd = 'vnew'
+    elseif g:split_term_style ==# 'horizontal'
+        let buffercmd = 'new'
+    else
+        echoerr 'ERROR! g:split_term_style is not a valid value (must be ''horizontal'' or ''vertical'' but is currently set to ''' . g:split_term_style . ''')'
+        throw 'ERROR! g:split_term_style is not a valid value (must be ''horizontal'' or ''vertical'')'
+    endif
+    if exists('g:split_term_resize_cmd')
+        exec g:split_term_resize_cmd
+    endif
+    exec buffercmd
+    exec 'term ' . a:command
+    exec 'startinsert'
+endfunction
+
+
+command! -nargs=0 CompileAndRun call TermWrapper(printf('g++ -std=c++11 -O2 %s && ./a.out', expand('%')))
+
+" keybindings for competetive programing
+autocmd FileType cpp  map <F5> <Esc>:w<CR>:CompileAndRun<CR>
+autocmd FileType cpp  map <F6> <Esc>:w<CR>:!g++ -std=c++11 -O2 -Wshadow -Wall -Wno-unused-result % && cat in.txt \| ./a.out;<CR>
+autocmd FileType cpp  map <F7> <Esc>:w<CR>:!g++ -std=c++11 -O2 -Wshadow -Wall -Wno-unused-result -DONLINE_JUDGE % && cat in.txt \| ./a.out > r.txt;<CR>
+autocmd FileType cpp  map <F8> <Esc>:w<CR>:!g++ -std=c++11 -Wshadow -Wall -Wno-unused-result -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG % && cat in.txt \| ./a.out > r.txt;<CR>
+autocmd FileType python map <F5> <Esc>:w<CR>:!python3 %; read -p "Press enter to continue"<CR>
+autocmd FileType python map <F6> <Esc>:w<CR>:!cat in.txt \| python3 %; read -p "Press enter to continue"; <CR>
+autocmd FileType python map <F7> <Esc>:w<CR>:!cat in.txt \| python3 % > r.txt; read -p "Press enter to continue";<CR>
+
+"
+let g:python3_host_prog="/usr/bin/python3"
+" :AutoFormat is slow in neovim for .py
+let autoformat_ft_blacklist = ['python', 'gitcommit',]
+autocmd BufWritePre * if index(autoformat_ft_blacklist, &ft) < 0 | :Autoformat
+" closing into brackets
+xnoremap <leader>s xi()<Esc>P
+vnoremap ( <esc>`>a)<esc>`<i(<esc>
+vnoremap ) <esc>`>a)<esc>`<i(<esc>
