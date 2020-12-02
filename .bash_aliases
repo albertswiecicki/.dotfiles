@@ -9,6 +9,8 @@ fi
 #general
 alias l='ls -Atr'
 alias c='caja . &'
+alias bat='batcat'
+alias vim='nvim'
 alias caja='caja . &'
 alias htop='htop -d 3'
 alias code='code . -n'
@@ -51,6 +53,7 @@ alias _mkdir='source $DOT/scripts/_mkdir.sh'
 alias __change_file_permissions='find . -type f -print0 | xargs -0 sudo chmod +666 && find . -type d -print0 | xargs -0 sudo chmod +775 && sudo chown -R $USER:$USER .'
 
 #Python
+alias py='python3'
 alias __virtualenv_py3='cd ~/virtualenvs && python3 -m venv '
 alias __virtualenv_py2='cd ~/virtualenvs && virtualenv --python=python2.7 '
 
@@ -58,18 +61,18 @@ alias __virtualenv_py2='cd ~/virtualenvs && virtualenv --python=python2.7 '
 alias __docker_var='echo CONTAINER_NAME: $CONTAINER_NAME; echo DOCKER_IMG: $DOCKER_IMG'
 alias __docker_check_nvidia='nvidia-docker run --rm -it nvidia/cuda:10.0-cudnn7-runtime nvidia-smi'
 alias __docker_run='nvidia-docker run -d -it \
-                    --name $CONTAINER_NAME \
-                    -p $DOCKER_PORTS:$DOCKER_PORTS \
-                    --shm-size 24G \
-                    -v /mnt:/mnt \
-                    -v $PROJECTS/data:/data \
-                    -v $PROJECTS/models:/models \
-                    -v $PROJECTS/results:/results \
-                    -v $PROJECTS/$PROJECT:/$PROJECT \
-                    -v ~/.bash_history:/root/.bash_history \
-                    -v /tmp/.X11-unix:/tmp/.X11-unix \
-                    -e DISPLAY=unix$DISPLAY \
-                    $DOCKER_IMG'
+    --name $CONTAINER_NAME \
+    -p $DOCKER_PORTS:$DOCKER_PORTS \
+    --shm-size 24G \
+    -v /mnt:/mnt \
+    -v $PROJECTS/data:/data \
+    -v $PROJECTS/models:/models \
+    -v $PROJECTS/results:/results \
+    -v $PROJECTS/$PROJECT:/$PROJECT \
+    -v ~/.bash_history:/root/.bash_history \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
+    $DOCKER_IMG'
 alias __docker_exec='docker exec -it $CONTAINER_NAME /bin/zsh'
 alias __docker_kill='docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME'
 alias __docker_build='docker build -t $DOCKER_IMG -f Dockerfile .'
