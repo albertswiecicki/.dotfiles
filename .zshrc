@@ -101,14 +101,47 @@ source $ZSH/oh-my-zsh.sh
 HISTSIZE=10000
 SAVEHIST=10000
 
-if [ -f ~/.bash_aliases ]; then                                                 
-    . ~/.bash_aliases                                                           
-fi                                                                              
-                                                                                
-if [ -f ~/.bash_custom ]; then                                                  
-    . ~/.bash_custom                                                            
-fi 
- echo -e "Self respect is a power #DFTBA, el Alberto!" | lolcat
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_custom ]; then
+    . ~/.bash_custom
+fi
+
+if [ ! -f ~/.dotfiles/.git/FETCH_HEAD ]; then
+    echo "Never updated before"
+    read -p "Do you want to update dot repo? [Yy|Nn]: " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        (builtin cd ~/.dotfiles && git pull)
+    else
+        echo Obmitting update
+    fi
+fi
+
+
+ftime=`stat -c %Y ~/.dotfiles/.git/FETCH_HEAD`
+ctime=`date +%s`
+days_since_last_update=$(( (ctime - ftime) / 86400 ))
+echo last update $days_since_last_update days ago
+
+if [ $days_since_last_update -ge 14 ]
+then
+    read "REPLY?Do you want to update dot repo? [Yy|Nn]: "
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        (builtin cd ~/.dotfiles && git pull)
+    else
+        echo Obmitting update
+    fi
+fi
+
+
+
+echo -e "Self respect is a power #DFTBA, el Alberto!" | lolcat
 source ~/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
